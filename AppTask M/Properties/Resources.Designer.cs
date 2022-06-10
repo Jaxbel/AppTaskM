@@ -63,9 +63,39 @@ namespace AppTask_M.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabecera {
+        internal static System.Drawing.Bitmap _2124275_document_essential_app_check_icon {
             get {
-                object obj = ResourceManager.GetObject("cabecera", resourceCulture);
+                object obj = ResourceManager.GetObject("2124275_document_essential_app_check_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Completed_task__Flatline {
+            get {
+                object obj = ResourceManager.GetObject("Completed task _Flatline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_calendario_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-calendario-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

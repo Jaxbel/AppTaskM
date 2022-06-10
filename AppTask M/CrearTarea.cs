@@ -17,36 +17,37 @@ namespace AppTask_M
         {
             InitializeComponent();
         }
+
         SqlConnection conexion = new SqlConnection(@"Data Source=DESKTOP-71KERVI\SERVIDOR;Initial Catalog=APPTASK;Integrated Security=True");
 
-
-        
         private void button2_Click(object sender, EventArgs e)
         {
 
-            
+            string estado = comboBoxEstado.Text.ToString();
             string titulo = txtTitulo.Text.ToString();
             string fechaIn = dateTimePicker2.Value.ToString("yyyy-MM-ddTHH:mm:ss");
             string finali = dateTimePicker3.Value.ToString("yyyy-MM-ddTHH:mm:ss");
             string import = cmbImport.Text.ToString();
-            string etiqueta = txtEtiq.Text.ToString();
+            string etiqueta = txtetiqueta.Text.ToString();
+            string descrip = txtboxDescrip.Text.ToString();
 
             conexion.Open();
 
-            //
+            
             try
             {
-                SqlCommand insert = new SqlCommand("insert into TAREAS(TITULO, FECHAIN, FECHAFIN, IMPORTANCIA, ETIQUETA)" + "values(@TITULO, @FECHAIN, @FECHAFIN, @IMPORTANCIA, @ETIQUETA)", conexion);
+                SqlCommand insert = new SqlCommand("insert into TAREAS (TITULO, IMPORTANCIA,ETIQUETA, DESCRIPCION, ESTADO, FECHAIN, FECHAFIN)" + "values(@TITULO, @IMPORTANCIA, @ETIQUETA, @DESCRIPCION, @ESTADO, @FECHAIN, @FECHAFIN)", conexion);
 
                 insert.Parameters.AddWithValue("TITULO", titulo);
-                insert.Parameters.AddWithValue("FECHAIN", fechaIn);
-                insert.Parameters.AddWithValue("FECHAFIN", finali);
                 insert.Parameters.AddWithValue("IMPORTANCIA", import);
                 insert.Parameters.AddWithValue("ETIQUETA", etiqueta);
+                insert.Parameters.AddWithValue("DESCRIPCION", descrip);
+                insert.Parameters.AddWithValue("ESTADO", estado);
+                insert.Parameters.AddWithValue("FECHAIN", fechaIn);
+                insert.Parameters.AddWithValue("FECHAFIN", finali);
+
+
                 insert.ExecuteNonQuery();
-
-
-                
 
             }
             catch(Exception ex)
@@ -70,9 +71,8 @@ namespace AppTask_M
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form1 frm = new Form1();
-            frm.Show();
+            
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -80,8 +80,10 @@ namespace AppTask_M
             txtTitulo.Text = "";
             dateTimePicker2.Text = "";
             dateTimePicker3.Text = "";
-            txtEtiq.Text = "";
+            txtetiqueta.Text = "";
             cmbImport.Text = null;
+            txtboxDescrip.Text = "";
+            
         }
 
         private void txtEtiq_TextChanged(object sender, EventArgs e)
@@ -135,6 +137,64 @@ namespace AppTask_M
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CrearTarea_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'aPPTASKDataSet.TAREAS' Puede moverla o quitarla según sea necesario.
+            this.tAREASTableAdapter.Fill(this.aPPTASKDataSet.TAREAS);
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SqlCommand consulta = new SqlCommand("Select *from TAREAS WHERE ID_TAREAS=@ID_TAREAS", conexion);
+            conexion.Open();
+            consulta.Parameters.AddWithValue("id_Cliente", txtTitulo.Text);
+
+
+            SqlDataReader leer = consulta.ExecuteReader();
+
+            while (leer.Read())
+            {
+                txtTitulo.Text = leer[0].ToString();
+                
+
+            }
+            MessageBox.Show("Consulta Completada");
+            conexion.Close();
+
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
 
         }

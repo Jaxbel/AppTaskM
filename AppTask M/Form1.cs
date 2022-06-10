@@ -19,14 +19,9 @@ namespace AppTask_M
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<CrearTarea>();
+            
+           
         }
-
-        private void panelForms_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         //Abrir formularios
         public void AbrirFormulario<MiForm>() where MiForm : Form, new()
         {
@@ -50,10 +45,15 @@ namespace AppTask_M
                 formulario.BringToFront();
             }
         }
+        private void panelForms_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<MisTareas>();
+            
         }
 
         private void btnMinimizar_Click(object sender, EventArgs e)
@@ -62,6 +62,21 @@ namespace AppTask_M
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<CrearTarea>();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<MisTareas>();
+        }
+
+        private void btnCerrar_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }

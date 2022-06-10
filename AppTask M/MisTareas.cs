@@ -19,18 +19,85 @@ namespace AppTask_M
             InitializeComponent();
         }
         SqlConnection conexion = new SqlConnection(@"Data Source=DESKTOP-71KERVI\SERVIDOR;Initial Catalog=APPTASK;Integrated Security=True");
-        private void MisTareas_Load(object sender, EventArgs e)
-        {
-            // TODO: esta línea de código carga datos en la tabla 'aPPTASKDataSet.TAREAS' Puede moverla o quitarla según sea necesario.
-            this.tAREASTableAdapter.Fill(this.aPPTASKDataSet.TAREAS);
-
-            
-
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cmbDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                conexion.Open();
+
+                
+                //if (APPTASK.State == ConnectionState.Closed)
+                //cn.Open();
+
+                using (DataTable dt = new DataTable("TAREAS"))
+                {
+                    using (SqlCommand cmd = new SqlCommand("select FECHAFIN from TAREAS where FECHAFIN between @FECHAFIN and @FECHAIN", conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@FECHAFIN", datePick.Value);
+                        cmd.Parameters.AddWithValue("@FECHAIN", DateTime.Now);
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                        sqlDataAdapter.Fill(dt);
+                        dataGridView1.DataSource = dt;
+
+                    }
+                }
+                conexion.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void datePick_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conexion.Open();
+
+
+
+                using (DataTable dt = new DataTable("TAREAS"))
+                {
+                    using (SqlCommand cmd = new SqlCommand("select * from TAREAS where FECHAFIN between @FECHAFIN and @FECHAIN", conexion))
+                    {
+                        //Convert datepick.value to yyyy/mm/dd
+
+                        cmd.Parameters.AddWithValue("@FECHAFIN", datePick.Value.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@FECHAIN", DateTime.Now);
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                        sqlDataAdapter.Fill(dt);
+                        dataGridView1.DataSource = dt;
+
+                    }
+                }
+                conexion.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void MisTareas_Load(object sender, EventArgs e)
+        {
+            this.tAREASTableAdapter.Fill(this.aPPTASKDataSet.TAREAS);
         }
     }
 }
