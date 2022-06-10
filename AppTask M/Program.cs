@@ -6,6 +6,14 @@ using System.Windows.Forms;
 
 namespace AppTask_M
 {
+    public class Global
+    {
+       static List<string> usersr = new List<string>();
+       static List<string> passwordr = new List<string>();
+
+        Global global = new Global();
+    }
+
     internal static class Program
     {
         /// <summary>
@@ -14,9 +22,11 @@ namespace AppTask_M
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Login());
         }
     }
 }
+
